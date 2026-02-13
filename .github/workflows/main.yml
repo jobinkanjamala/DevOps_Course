@@ -1,0 +1,18 @@
+            - name: AWS Update S3 Action
+  # You may pin to the exact commit or the version.
+  # uses: stcalica/s3-upload@55b1025e50a701d75588f290ff368bc350ce31d0
+  uses: stcalica/s3-upload@0.0.1
+  with:
+    # Bucket Name
+    bucket: # optional, default is 
+    # Package to upload S3
+    package: # optional, default is 
+    # Key
+    key: # optional, default is 
+    # AWS Secret Key
+    AWS_SECRET_KEY: # optional, default is 
+    # AWS Secret Key
+    AWS_SECRET_ID: # optional, default is 
+    # AWS Region
+    AWS_REGION: # optional, default is 
+          
