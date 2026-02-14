@@ -1,18 +1,21 @@
-            - name: AWS Update S3 Action
-  # You may pin to the exact commit or the version.
-  # uses: stcalica/s3-upload@55b1025e50a701d75588f290ff368bc350ce31d0
-  uses: stcalica/s3-upload@0.0.1
-  with:
-    # Bucket Name
-    bucket: # optional, default is 
-    # Package to upload S3
-    package: # optional, default is 
-    # Key
-    key: # optional, default is 
-    # AWS Secret Key
-    AWS_SECRET_KEY: # optional, default is 
-    # AWS Secret Key
-    AWS_SECRET_ID: # optional, default is 
-    # AWS Region
-    AWS_REGION: # optional, default is 
-          
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'us-west-1'   # optional: defaults to us-east-1
+        SOURCE_DIR: 'Static Web'      # optional: defaults to entire repository
